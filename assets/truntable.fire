@@ -789,6 +789,9 @@
       "__id__": 2
     },
     "_enabled": true,
+    "queryJson": {
+      "__uuid__": "3d16347f-1367-4ffa-85bd-14e5df165199"
+    },
     "pointer": {
       "__id__": 8
     },

@@ -58,6 +58,10 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        queryJson: {
+            default: null,
+            type: cc.RawAsset
+        },
         pointer: {
             default: null,
             type: cc.Sprite,
@@ -124,8 +128,9 @@ cc.Class({
             // 以上测试
 
             // 接收后端数据替换为cc.loader.load,本地测试json使用cc.loader.loadRes
-            // var remoteUrl = "JSON/query"
+            // var remoteUrl = 'JSON/query'
             // cc.loader.loadRes(remoteUrl, (err, res) => {
+            //     console.log(res)
             //     var filterArr = awardMapping.filter(item => Number(item.angleValue) === res.json.result)
             //     // 若没有找到对应奖项 则默认显示第一个 谢谢参与 此时图片需要调整
             //     // this.awards = filterArr.length ? filterArr[0] : awardMapping[0]
@@ -133,6 +138,14 @@ cc.Class({
             //     this.awards = filterArr[0]
             //     this.runPointer()
             // })
+            
+            // 加载json其他方法
+            // var filterArr = awardMapping.filter(item => Number(item.angleValue) === this.queryJson.json.result)
+            // // 若没有找到对应奖项 则默认显示第一个 谢谢参与 此时图片需要调整
+            // // this.awards = filterArr.length ? filterArr[0] : awardMapping[0]
+            // // 针对当前图片 都有奖的情况 result值应为 1 - 8
+            // this.awards = filterArr[0]
+            // this.runPointer()
         }
     },
     getOffsetAngle() {
