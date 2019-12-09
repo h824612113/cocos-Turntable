@@ -54,12 +54,6 @@ var awardMapping = [
         angleValue:'8'
     }
 ]
-
-var DirectionType = cc.Enum({
-    Positive: 0, // 正向
-    Opposite: 1 // 反向
-});
-
 cc.Class({
     extends: cc.Component,
 
@@ -97,12 +91,11 @@ cc.Class({
         alreadyAngle: {
             default: 0,
             type: cc.Integer,
-            tooltip: '当前指针旋转偏移角度, 请输入正整数'
-        },
-        directionSelect: {
-            type: cc.Enum(DirectionType),
-            default: DirectionType.Positive,
-            tooltip: '指针旋转方向: Positive正向 Opposite反向'
+            slide: true,
+            min: -360,
+            max: 0,
+            step: 1,
+            tooltip: '当前指针旋转偏移角度, 负数值为正向旋转;不支持反向旋转'
         }
     },
 
@@ -120,6 +113,7 @@ cc.Class({
     },
     pointerButtonStartControl() {
         if (!this.isClicked) {
+            this.awardWords.string = ''
             this.isClicked = true
             // 以下测试
             var result = parseInt(Math.random()*(8 - 1 + 1) + 1)
@@ -163,10 +157,13 @@ cc.Class({
         this.isClicked = false // 修改点击状态为可点击
         this.alreadyAngle = Math.abs(this.pointer.node.angle % 360)
         // console.log('动作结束', this.alreadyAngle)
+        if (!this.isClicked) {
+            this.awardWords.string = this.awards.awardWords + this.awards.amount
+        }
     },
     start () {
-
     },
-
-    // update (dt) {},
+    
+    update (dt) {
+    },
 });
